@@ -2,16 +2,13 @@ package com.javalove.dcp.example;
 
 import java.util.concurrent.TimeUnit;
 
-import com.couchbase.client.core.event.CouchbaseEvent;
 import com.couchbase.client.dcp.Client;
 import com.couchbase.client.dcp.Client.Builder;
 import com.couchbase.client.dcp.ControlEventHandler;
 import com.couchbase.client.dcp.DataEventHandler;
 import com.couchbase.client.dcp.StreamFrom;
 import com.couchbase.client.dcp.StreamTo;
-import com.couchbase.client.dcp.SystemEventHandler;
 import com.couchbase.client.dcp.config.DcpControl;
-import com.couchbase.client.dcp.events.StreamEndEvent;
 import com.couchbase.client.dcp.message.DcpDeletionMessage;
 import com.couchbase.client.dcp.message.DcpMutationMessage;
 import com.couchbase.client.dcp.transport.netty.ChannelFlowController;
@@ -35,7 +32,7 @@ public class ClientStarter {
 			if (isNoopEnable)
 				initMsgBuild.append(" with NOOP enabled");
 			else
-				initMsgBuild.append(" with NOOP desabled, ");
+				initMsgBuild.append(" with NOOP disabled, ");
 			initMsgBuild.append("with a sleep time of: " + msSleep + " ms");
 			System.out.println(initMsgBuild.toString());
 
@@ -52,7 +49,7 @@ public class ClientStarter {
 			if (isNoopEnable) {
 				builder
 				.controlParam(DcpControl.Names.ENABLE_NOOP, "true")
-				.controlParam(DcpControl.Names.SET_NOOP_INTERVAL, 60);
+				.controlParam(DcpControl.Names.SET_NOOP_INTERVAL, "20");
 			}
 
 			final Client client = builder.build();
